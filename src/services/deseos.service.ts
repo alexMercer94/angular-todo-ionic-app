@@ -49,4 +49,9 @@ export class DeseosService {
             this.listas = [];
         }
     }
+
+    deleteList(list: Lista) {
+        this.listas = this.listas.filter(listaData => listaData.id !== list.id);
+        this.saveStorage();
+    }
 }

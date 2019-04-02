@@ -50,8 +50,4 @@ export class Tab1Page {
         });
         alert.present();
     }
-
-    selectedList(list: Lista) {
-        this.router.navigateByUrl(`/tabs/tab1/agregar/${list.id}`);
-    }
 }
