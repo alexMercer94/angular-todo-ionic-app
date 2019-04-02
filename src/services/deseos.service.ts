@@ -8,9 +8,45 @@ export class DeseosService {
     listas: Lista[] = [];
 
     constructor() {
-        const list1 = new Lista('Recolectar piedras del infinito');
-        const list2 = new Lista('Heroes a desaparecer');
+        this.loadStorage();
+    }
 
-        this.listas.push(list1, list2);
+    /**
+     * Create list from app
+     * @param titulo List's title
+     */
+    createList(titulo: string) {
+        const newList = new Lista(titulo);
+        this.listas.push(newList);
+        this.saveStorage();
+
+        return newList.id;
+    }
+
+    /**
+     * Obtein data in order to sho it in agregar component
+     * @param id Id of list
+     */
+    getLista(id: string | number) {
+        id = Number(id);
+        return this.listas.find((listData: Lista) => listData.id === id);
+    }
+
+    /**
+     * Save data in local storage
+     */
+    saveStorage() {
+        localStorage.setItem('data', JSON.stringify(this.listas));
+    }
+
+    /**
+     * Load data from local storage and show
+     */
+    loadStorage() {
+        if (localStorage.getItem('data')) {
+            this.listas = JSON.parse(localStorage.getItem('data'));
+        } else {
+            this.listas = [];
+        }
     }
 }
